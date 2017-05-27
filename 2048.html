@@ -1,0 +1,438 @@
+ <!--蔡东 电子科技大学  2048小游戏-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>2048</title>
+    <script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
+    <style>
+    @media  screen and (min-width: 800px){
+            #box{
+             width:530px;
+              height:530px;
+              position: absolute;
+              background-color: #bbada0;
+             border-radius: 5px;
+             left:25em;
+             top:5em;
+       }
+        #up{
+   top:160px;
+   left:150px;
+ }
+ #down{
+   top:340px;
+   left:150px;
+ }
+ #left{
+   top:250px;
+   left:60px;
+ }
+ #right{
+   top:250px;
+   left:240px;
+ }
+ #index{
+   top:250px;
+   left:150px;
+ }
+  .score{
+    position: absolute;
+    top:15em;
+    left:1em;
+    font-size: 2em;
+ }
+ .num{
+    position: relative;
+    top:10px;
+    left:50px;
+    font-size: 2em;
+    color:red;
+ }
+  .cols{
+    float: left;
+    width:100px;
+    height:100px;
+    border-radius: 5px;
+    background-color: rgba(238, 228, 218, 0.35);
+    margin-left: 25px;
+    margin-top: 25px;
+ }
+ .cols:hover{
+    cursor:pointer;
+ }
+ .dong {
+    position: relative;
+    text-align: center;
+    top:0;
+    left:0;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    line-height: 100px;
+    color: #FFF;
+    font-size: 30px;
+    animation:my 1s;
+    -webkit-animation:my 1s;
+    -moz-animation:my 1s;
+    -o-animation:my 1s;
+    animation:e 0.5s;
+    -webkit-animation:e 0.5s;
+    -moz-animation:e 0.5s;
+    -o-animation:e 0.5s;
+ }
+ @keyframes e{
+       0% {width:100px;height:100px;top:0;left:0;}
+       50% {width:90px;height:90px;top:5px;left:5px;}
+       100% {width:100px;height:100px;top:0px;left:0;}
+       }
+    }
+    @media  screen and (max-width: 800px){
+          #box{
+    width:430px;
+    height:430px;
+    position: absolute;
+    background-color: #bbada0;
+    border-radius: 5px;
+    left:2em;
+    top:25em;
+ }
+  #up{
+   top:60px;
+   left:250px;
+ }
+ #down{
+   top:240px;
+   left:250px;
+ }
+ #left{
+   top:150px;
+   left:160px;
+ }
+ #right{
+   top:150px;
+   left:340px;
+ }
+ #index{
+   top:150px;
+   left:250px;
+ }
+  .score{
+    position: absolute;
+    top:10em;
+    left:1em;
+    font-size: 2em;
+ }
+ .num{
+    position: relative;
+    top:10px;
+    left:50px;
+    font-size: 2em;
+    color:red;
+ }
+  .cols{
+    float: left;
+    width:75px;
+    height:75px;
+    border-radius: 5px;
+    background-color: rgba(238, 228, 218, 0.35);
+    margin-left: 25px;
+    margin-top: 25px;
+ }
+ .cols:hover{
+    cursor:pointer;
+ }
+ .dong {
+    position: relative;
+    text-align: center;
+    top:0;
+    left:0;
+    width: 75px;
+    height: 75px;
+    border-radius: 5px;
+    line-height: 75px;
+    color: #FFF;
+    font-size: 30px;
+    animation:my 1s;
+    -webkit-animation:my 1s;
+    -moz-animation:my 1s;
+    -o-animation:my 1s;
+    animation:e 0.5s;
+    -webkit-animation:e 0.5s;
+    -moz-animation:e 0.5s;
+    -o-animation:e 0.5s;
+ }
+ @keyframes e{
+       0% {width:75px;height:75px;top:0;left:0;}
+       50% {width:65px;height:65px;top:5px;left:5px;}
+       100% {width:75px;height:75px;top:0px;left:0;}
+       }
+}
+
+ @keyframes my{
+    0%{opacity: 0;}
+    100%{opacity :1;}
+}
+
+ .button{
+    width:75px;
+    height: 75px;
+    border-radius:5px;
+    position: absolute;
+    border:2px solid #666;
+    color:#666;
+    line-height: 75px;
+    text-align: center;
+    font-size: 2em;
+ }
+
+ .button:hover{
+    cursor:pointer;
+    color:#FFF;
+    background-color: #666;
+ }
+
+
+    </style>
+</head>
+<body>
+    <div id="box">
+           <span class="rows">
+              <div class="cols" name="0"  ></div>
+              <div class="cols" name="0"  ></div>
+              <div class="cols" name="0"  ></div>
+              <div class="cols" name="0"  ></div>
+           </span>
+           <span class="rows">
+              <div class="cols" name="0"  ></div>
+              <div class="cols" name="0"  ></div>
+              <div class="cols" name="0"  ></div>
+              <div class="cols" name="0"  ></div>
+           </span>
+           <span class="rows">
+              <div class="cols" name="0"  ></div>
+              <div class="cols" name="0" ></div>
+              <div class="cols" name="0" ></div>
+              <div class="cols" name="0" ></div>
+           </span>
+           <span class="rows">
+              <div class="cols" name="0" ></div>
+              <div class="cols" name="0" ></div>
+              <div class="cols" name="0" ></div>
+              <div class="cols" name="0" ></div>
+           </span>
+      </div>
+      <div class="button" id="up">上</div>
+      <div class="button" id="down">下</div>
+      <div class="button" id="left">左</div>
+      <div class="button" id="right">右</div>
+      <div class="button" id="index">重置</div>
+      <div class="score">你的分数是<span class="num">0</span></div>
+
+    <script>
+    
+$(function(){
+
+     var x,y,sp,content,dong,score,bool,count,first,second,color;
+     var num=new Array();
+
+  for(var i=0;i<4;i++){
+        num[i] = new Array();
+        for(var j=0;j<4;j++){
+        num[i][j] = $("#box").children(".rows").eq(i).children(".cols").eq(j);
+  }
+}
+    function init(){
+        x = Math.floor(4*Math.random());
+        y = Math.floor(4*Math.random());
+        dong = Math.floor(3*Math.random())+1;
+        first = Math.floor(3*Math.random())+1; 
+        second = Math.floor(3*Math.random())+1; 
+  }
+   init();
+   function createNu(lel){
+       if((num[x][y].children(".dong").length == 0)&&(num[x][y].attr("name") == "0")){
+          createDiv(num[x][y],lel);
+          num[x][y].attr("name","1");
+          init();
+       }
+       else{
+         init();
+         createNu(dong);
+       }
+   }
+   createNu(first);
+   createNu(second);
+
+ function kuku(col){
+       color = col.text();
+          switch(color){
+             case '2':
+                col.css("background-color","#999");
+                break;
+             case '4':
+                col.css("background-color","#666");
+                break;
+             case '8':
+                col.css("background-color","#2E8B57");
+                break;
+             case '16':
+                col.css("background-color","  #FF7F50");
+                break;
+             case '32':
+                col.css("background-color","#CD661D");
+                break;
+             case '64':
+                col.css("background-color"," #A0522D");
+                break;
+             case '128':
+                col.css("background-color"," #458B00");
+                break;
+             case '256':
+                col.css("background-color","#CD2626");
+                break;
+             case '512':
+                col.css("background-color","#9400D3");
+                break;
+             case '1024':
+                col.css("background-color","#CD8500");
+                break;
+             case '2048':
+                col.css("background-color","  #008B8B");
+                break;
+             default:
+                break;
+          }
+ }
+
+  function createDiv(a,el){
+    $(function() { 
+        sp = $("<div class='dong'></div>").text(Math.pow(2,el));
+       kuku(sp);
+        a.append(sp);
+     });
+  } 
+   
+    score = 0;
+
+  function move(ol,el){
+            if(  ol.attr("name")  ==  "1"  ){
+                  if(el.attr("name") == "0") { 
+                      content = $("<div class='dong'></div>").text(ol.children().text());
+                      kuku(content);
+                      el.append(content);
+                      ol.empty();
+                      ol.attr("name","0");
+                      el.attr("name","1");
+                }
+                else if(el.attr("name") == "1"){
+                     if(  ol.children().text()  == el.children().text()  ){
+                                    content = $("<div class='dong'></div>").text(ol.children().text()*2);
+                                    kuku(content);
+                                    score = score + ol.children().text()*2;
+                                    el.empty();
+                                    el.append(content);
+                                    ol.empty();
+                                    ol.attr("name","0");
+                                   el.attr("name","1");
+                  }
+          }
+     }
+}
+  
+  function moveUp(){
+        for(var i=3;i>=1;i--)
+          for(var j=0;j<4;j++){
+            move(num[i][j],num[i-1][j]);
+          }
+      }
+   function moveDown(){
+        for(var i=0;i<3;i++)
+          for(var j=0;j<4;j++){           
+            move(num[i][j],num[i+1][j]);
+              }
+          }
+   function moveLeft(){
+        for(var i=0;i<4;i++)
+          for(var j=3;j>=1;j--){
+            move(num[i][j],num[i][j-1]);
+          }
+   }
+   function moveRight(){
+        for(var i=0;i<4;i++)
+          for(var j=0;j<3;j++){
+            move(num[i][j],num[i][j+1]);
+          }
+   }
+
+bool = function(){
+     if($(".dong").length ==15){
+          count = 0;
+          function abc(){
+             count++;
+          }
+         $('#a').on('click',abc);
+         if(  (count == 1)  &&  ($(".dong").length ==16)   ){
+               return false;
+         }
+         else if(  (count == 2)  &&  ($(".dong").length ==16)   ){
+              return ture;
+         }
+         else{
+          return false;
+         }
+     }
+     else{
+      return false;
+     }
+}
+  
+    function gogo(func){
+       if(($(".dong").length ==16) &&bool ){
+            alert("你的成绩是"+score+"分");
+            history.go(0) ;
+            $("span.num").text("0");
+          }else{
+          func;
+          createNu(dong);
+        }
+    }
+  
+   $(function(){
+      $("#index").click(function(){
+          history.go(0) ;
+          $("span.num").text("0");
+     });
+   });
+
+  $(function(){
+      $("#up").click(function(){
+         gogo(moveUp());
+         $("span.num").text(score);
+     });
+   });
+
+  $(function(){
+      $("#down").click(function(){
+        gogo(moveDown());
+        $("span.num").text(score);
+     });
+   });
+  $(function(){
+      $("#left").click(function(){
+        gogo(moveLeft());
+        $("span.num").text(score);
+     });
+   });
+  $(function(){
+      $("#right").click(function(){
+        gogo(moveRight());
+        $("span.num").text(score);
+     });
+    });
+});
+    </script>
+</body>
+</html>
